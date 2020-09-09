@@ -1,0 +1,88 @@
+-------------------------------------------------------------------------------
+INSTALL
+-------------------------------------------------------------------------------
+
+Requirements
+------------
+ - git
+ - gcc (>= 4.0)
+ - g++
+ - make
+ - libtool
+ - autoconf >= 2.63
+ - automake >= 1.11
+ - cmake >= 2.6
+ - Qt >= 5.0
+ - libtool
+ - libglib >= 2.32.0
+ - libzip >= 0.10
+ - libusb-1.0 >= 1.0.16
+	On FreeBSD, this is an integral part of the FreeBSD libc, not an extra package/library.
+	This is part of the standard OpenBSD install (not an extra package), apparently.
+ - libboost >= 1.42 (including the following libs):
+    - libboost-system
+    - libboost-thread
+ - pkg-config >= 0.22
+	This is part of the standard OpenBSD install (not an extra package), apparently.
+ - check >= 0.9.4 (optional, only needed to run unit tests)
+ - libfftw3 >= 3.3
+
+Building and installing
+-----------------------
+Step1: Get the DSView source code
+
+ $ git clone git://github.com/DreamSourceLab/DSView
+
+
+Step2: Installing the requirements:
+
+please check your respective distro's package manager tool if you use other distros
+Debian/Ubuntu:
+ $ sudo apt-get install git-core build-essential cmake autoconf automake libtool pkg-config \
+   libglib2.0-dev libzip-dev libudev-dev libusb-1.0-0-dev \
+   python3-dev qt5-default libboost-dev libboost-test-dev libboost-thread-dev libboost-system-dev libboost-filesystem-dev check libfftw3-dev
+
+Fedora (18, 19):
+ $ sudo yum install git gcc g++ make cmake autoconf automake libtool pkgconfig glib2-devel \
+   libzip-devel libudev-devel libusb1-devel \
+   python3-devel qt-devel boost-devel check libfftw3-devel
+
+Arch:
+ $ pacman -S base-devel git cmake glib2 libzip libusb check 
+   python boost qt5 fftw
+
+
+Step3: Building
+ 
+ $ cd libsigrok4DSL
+ $ ./autogen.sh
+ $ ./configure
+ $ make
+ $ sudo make install
+ $ cd ..
+
+ $ cd libsigrokdecode4DSL
+ $ ./autogen.sh
+ $ ./configure
+ $ make
+ $ sudo make install
+ $ cd ..
+
+ $ cd DSView
+ $ cmake .
+
+/*
+ * If this step fails, 
+ * make sure that your pkg-config is properly configured 
+ * to find the libsigrok and libsigrokdecode libraries 
+ * (It's not by default in Fedora 23). 
+ * To do this add "export PKG_CONFIG_PATH="/usr/local/lib/pkgconfig" 
+ * to your ~/.bashrc and reload it `. ~/.bashrc`.
+ */
+
+ $ make
+ $ sudo make install
+
+See the following wiki page for more (OS-specific) instructions:
+
+ http://sigrok.org/wiki/Building

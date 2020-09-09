@@ -1,0 +1,47 @@
+to do list
+
+
+get cpa button to print a message
+
+get cpa button to then run code for opening uart port
+
+send a byte on uart, and wait for return
+
+if byte matchs, then enter code to spit out random key
+
+randomize key
+
+also spit out a termination byte or something
+
+listen for byte to confirm that it was written on fpga
+
+then enter code to trigger capture
+
+signal fgpa to reset
+
+check when capture is finished to save to file with key name
+
+send byte and repeat
+
+10 wrapped things to try - 3 traces each on 1
+04 74 f0 d9 68 b0 0f 13 77 9c a0 ec 67 35 fb 71 
+43 33 06 8c 08 58 bb 69 d7 30 55 bb d7 7f 49 c0 
+1c 83 33 04 ff df 90 c0 9e ab 09 0e db 41 f1 57 
+bd c2 fd cc 0d 11 b7 17 71 a7 42 83 c6 5d 32 f6 
+8c 82 d9 15 bd 01 3b fa 36 cf 38 52 00 13 c0 ca 
+6e b0 cf 11 59 2a 7c 2d 5d 4c 0c 68 03 fd bc 45 
+9e 41 ea 48 ba e8 29 1f 31 04 b1 dd 91 b3 bc ad 
+5d fb f0 2d 0e 82 2a a4 cf 80 18 75 d8 1a 92 ba 
+e4 76 df 47 40 db 52 1f 4e d7 9f ca 39 c4 c7 69 
+f8 0c 7a 00 a3 ba 3f f6 ed 5e b6 60 c0 85 67 e1 
+
+ee 60 2b 25 f2 d6 65 3e 28 ba 07 b3 d8 bd 2c fc 
+35 f7 9f 1f 4a bf 30 51 e0 37 26 42 78 82 56 73 
+95 c5 5f ad e4 49 8b 1c 52 50 0c 61 77 52 69 98 
+ff 65 74 d6 53 27 48 7d c8 3f 6d 3a d2 46 04 28 
+b6 ae f0 62 b4 ee ce 1c b0 79 20 6f 2a da 3f f3 
+
+
+
+
+

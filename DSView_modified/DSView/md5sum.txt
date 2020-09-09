@@ -1,0 +1,20 @@
+## This file contains the list of md5 checksums of all files on this
+## medium.
+##
+## You can verify them automatically with the 'verify-checksums' boot parameter,
+## or, manually with: 'md5sum -c md5sum.txt'.
+##
+##
+340d35b31473c6dcbda9a94ecff3c99a  ./.disk/archive_trace
+15b907c998db6e6c4d2e85b99e9acb37  ./.disk/info
+46076ff5e439e25a9287e145a1ab1d26  ./live/filesystem.packages
+4083aeef506754fa3e897469168ba1e5  ./live/filesystem.packages-remove
+c6a3f7b9dcb59daec2b508d379cd3ff2  ./live/filesystem.squashfs
+87bbc9cbc076415d348a535b0d471d55  ./live/initrd.img-3.12.6-red-ribbon-powerpc64-ps3
+11851d1e3b7d031b0a73c9e5125fc5a8  ./live/vmlinux-3.12.6-red-ribbon-powerpc64-ps3
+d124a89be70a3d35da628b6798024bdf  ./yaboot/boot.msg
+a92f8bc0569860b26218abdf3194fc0f  ./yaboot/hfs.map
+0a24343641e4aff5ebc20f975904e941  ./yaboot/ofboot.b
+730e47e6fbbf3238a4ed434fa23435bb  ./yaboot/pegasos
+6b00eddde60acadc3ffb8a55765780ca  ./yaboot/yaboot
+a1032fc620e6daf175d8cf4bafddb5f9  ./yaboot/yaboot.conf
