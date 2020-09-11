@@ -13,3 +13,4 @@ SimpleSerial.py mod to work with SPI Flash Simulator design, replaced the DSView
 Attack script for ARM7TDMI target power traces, use T-Box AES.
 
 ## Misc
+Various images and scripts for power analysis purposes
