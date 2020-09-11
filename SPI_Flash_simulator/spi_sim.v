@@ -12,8 +12,15 @@
 module spi_sim 
 #( 
 	parameter WIDTH = 3, // Width of the register required
-	parameter N = 1,// We will divide by 12 for example in this case
-	parameter PATCH_OFFSET = 16'h4230
+	parameter PATCH_OFFSET = 16'h4230,
+	parameter READ_CMD = 8'h03, // normal read
+	parameter RDID_CMD  = 8'h9F, // signature read
+	parameter RDSR_CMD = 8'h05,	// read status register 
+	parameter STATUS_REG = 8'b01000000,
+	parameter RDID_MANU_ID = 8'hC2,	// manufacturer id for chip sig
+	parameter RDID_DEV_ID0 = 8'h20, // device id byte 0
+	parameter RDID_DEV_ID1 = 8'h19, // device id byte 1
+	parameter TRIGGER_OFFSET = 32'h4DE70 // offset to trigger capture upon reading
 )
 
 (
@@ -170,7 +177,7 @@ begin
 	rx_data <= rx_data_in;
 	
 	// trigger capture at end of ipl read in
-	if(read_addr > 32'h4DE70)
+	if(read_addr > TRIGGER_OFFSET)
 	begin
 		trigger_set <= 0;		
 	end
@@ -198,19 +205,21 @@ begin
 	
 	if(spi_rx_strobe)
 	begin
-		if(spi_rx_data == 5)
+		if(spi_rx_data == RDSR_CMD) // RDSR read status register
 		begin
-			flash_data <= 8'h40;
+			flash_data <= STATUS_REG; // reply with status reg
 			spi_tx_strobe <= 1;
 		end
 		
+		// RDID read identification (continuied)
+		// outputs JEDEC ID: 1-byte Manufacturer ID & 2-byte Device ID
 		else if(sig_checked == 1)
 		begin
 			if(sig_cnt < 2)
 			begin
 				case(sig_cnt)
-				0: flash_data <= 8'h20;
-				1: flash_data <= 8'h19;
+				0: flash_data <= RDID_DEV_ID0; // Device ID byte 1
+				1: flash_data <= RDID_DEV_ID1; // Device ID byte 2
 				endcase
 				sig_cnt = sig_cnt + 1;
 				spi_tx_strobe <= 1;
@@ -223,7 +232,8 @@ begin
 			end
 		end
 		
-		else if(bytes == 0 && spi_rx_data == 3)
+		// normal read RD
+		else if(bytes == 0 && spi_rx_data == READ_CMD)
 		begin
 			read_in_progress <= 1;
 		end
@@ -290,13 +300,12 @@ begin
 		end
 
 		
-		
-		else if(spi_rx_data == 8'h9f)//sig check
+		// RDID read identification
+		// outputs JEDEC ID: 1-byte Manufacturer ID & 2-byte Device ID
+		else if(spi_rx_data == RDID_CMD)
 		begin
-
-		
 			sig_cnt = 0;
-			flash_data <= 8'hc2;//0xc2		
+			flash_data <= RDID_MANU_ID; // Manufacturer ID	
 			spi_tx_strobe <= 1;
 			sig_checked = 1;
 		end
